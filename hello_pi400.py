@@ -1,1 +1,1 @@
-print("Hellow World from Pi 400")
+print("Hello World from Pi 400")
