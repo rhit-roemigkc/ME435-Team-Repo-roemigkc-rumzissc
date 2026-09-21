@@ -7,15 +7,15 @@ while(1)
         case 2
             switch(menu('X-Axis','1','2','3','4','5'))
                 case 1
-                    writeline('X-AXIS 1');
+                    writeline(s,'X-AXIS 1');
                 case 2
-                    writeline('X-AXIS 2');
+                    writeline(s,'X-AXIS 2');
                 case 3
-                    writeline('X-AXIS 3');
+                    writeline(s,'X-AXIS 3');
                 case 4
-                    writeline('X-AXIS 4');
+                    writeline(s,'X-AXIS 4');
                 case 5
-                    writeline('X-AXIS 5');
+                    writeline(s,'X-AXIS 5');
             end
         case 3
             switch(menu('Z-Axis','Extend','Retract'))
@@ -92,11 +92,14 @@ while(1)
         case 6
             writeline(s,'LOADER_STATUS');
         case 7
-            switch('Special Move')
-            end
+            specialMove;
         case 8
             fprintf('Goodbye\n')
             break
     end
     readline(s)
+    if ~startsWith(readline(s),'R')
+        fprintf('An error has occured, terminating program\n')
+        break
+    end
 end
