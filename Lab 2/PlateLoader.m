@@ -20,7 +20,7 @@ classdef PlateLoader < hgsetget
     methods
         function obj = PlateLoader(portNumber)
             % Construct a PlateLoader Object
-            portStr = sprintf('COM%d',portNumber);
+            portStr = sprintf("COM%d",portNumber);
 
 %            portStr = '/dev/cu.usbserial-110'; % ignore the portNumber for my Mac
 
