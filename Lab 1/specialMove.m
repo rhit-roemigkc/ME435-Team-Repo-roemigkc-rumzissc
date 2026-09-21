@@ -11,7 +11,7 @@ function [] = specialMove(s)
 writeline(s,'RESET');
 readline(s);
 uiwait(helpdlg('Please remove all plates from the machine'));
-writeline(s,'X AXIS 1');
+writeline(s,'X-AXIS 1');
 readline(s);
 writeline(s,'GRIPPER OPEN');
 readline(s);
@@ -30,9 +30,7 @@ writeline(s,'Z-AXIS RETRACT');
 readline(s);
 
 % Move 1 to 2
-writeline(s,'RESET');
-readline(s);
-writeline(s,'X AXIS 1');
+writeline(s,'X-AXIS 1');
 readline(s);
 writeline(s,'GRIPPER OPEN');
 readline(s);
@@ -42,7 +40,7 @@ writeline(s,'GRIPPER CLOSE');
 readline(s);
 writeline(s,'Z-AXIS RETRACT');
 readline(s);
-writeline(s,'X AXIS 2');
+writeline(s,'X-AXIS 2');
 readline(s);
 writeline(s,'Z-AXIS EXTEND');
 readline(s);
@@ -52,9 +50,7 @@ writeline(s,'Z-AXIS RETRACT');
 readline(s);
 
 % Move 2 to 3
-writeline(s,'RESET');
-readline(s);
-writeline(s,'X AXIS 2');
+writeline(s,'X-AXIS 2');
 readline(s);
 writeline(s,'GRIPPER OPEN');
 readline(s);
@@ -64,7 +60,7 @@ writeline(s,'GRIPPER CLOSE');
 readline(s);
 writeline(s,'Z-AXIS RETRACT');
 readline(s);
-writeline(s,'X AXIS 3');
+writeline(s,'X-AXIS 3');
 readline(s);
 writeline(s,'Z-AXIS EXTEND');
 readline(s);
@@ -74,9 +70,7 @@ writeline(s,'Z-AXIS RETRACT');
 readline(s);
 
 % Move 3 to 5
-writeline(s,'RESET');
-readline(s);
-writeline(s,'X AXIS 3');
+writeline(s,'X-AXIS 3');
 readline(s);
 writeline(s,'GRIPPER OPEN');
 readline(s);
@@ -86,12 +80,11 @@ writeline(s,'GRIPPER CLOSE');
 readline(s);
 writeline(s,'Z-AXIS RETRACT');
 readline(s);
-writeline(s,'X AXIS 5');
+writeline(s,'X-AXIS 5');
 readline(s);
 writeline(s,'Z-AXIS EXTEND');
 readline(s);
 writeline(s,'GRIPPER OPEN');
 readline(s);
 writeline(s,'Z-AXIS RETRACT');
-readline(s);
 end
