@@ -28,6 +28,51 @@ classdef PlateLoaderSim < hgsetget
             obj.isGripperClosed = true;
             obj.isPlatePresent = false;
         end
+        function [] = specialMove(obj)
+            % move 1 to 1
+            obj.reset()
+            obj.x(1)
+            obj.open()
+            obj.extend()
+            obj.close()
+            obj.retract()
+            obj.open()
+            obj.extend()
+            obj.retract()
+
+            % move 1 to 2
+            obj.x(1)
+            obj.open()
+            obj.extend()
+            obj.close()
+            obj.retract()
+            obj.x(2)
+            obj.extend()
+            obj.open()
+            obj.retract()
+
+            % move 2 to 3
+            obj.x(2)
+            obj.open()
+            obj.extend()
+            obj.close()
+            obj.retract()
+            obj.x(3)
+            obj.extend()
+            obj.retract()
+
+            % move 3 to 5
+            obj.x(3)
+            obj.open()
+            obj.extend()
+            obj.close()
+            obj.retract()
+            obj.x(5)
+            obj.extend()
+            obj.open()
+            obj.retract()
+            fprintf("Sequence Complete")
+        end
         function response = reset(obj)
             % Reset robot
             fprintf('RESET\n'); %send to robot (console)
