@@ -37,10 +37,9 @@ classdef PlateLoader < hgsetget
             %   Maybe use the GRIPPER_STATUS command and ready string reply
             obj.isPlatePresent = false;
         end
-        function [] = specialMove(obj)
-            fibonacciMove(obj.serialRobot)
+        function response = specialMove(obj)
+            response = fibonacciMove(obj.serialRobot);
         end
-
         function response = reset(obj)
             % Reset robot
             writeline(obj.serialRobot,'RESET');
