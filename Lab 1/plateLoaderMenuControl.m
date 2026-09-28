@@ -1,6 +1,6 @@
 function [] = plateLoaderMenuControl(s)
+clc
 while(1)
-    clc
     switch(menu('Choose Command','Reset','X-Axis','Z-Axis','Gripper', ...
             'Move','Status','Special Moves','Exit'))
         case 1
@@ -99,6 +99,7 @@ while(1)
             break
     end
     result = readline(s)
+    fprintf(result)
     if ~startsWith(result,'R')
         fprintf('An error has occured, terminating program\n')
         break
