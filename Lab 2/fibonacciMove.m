@@ -1,4 +1,4 @@
-function [] = specialMove(s)
+function response = fibonacciMove(s)
 %% moves plate in a fibonacci sequence
     %i = 1;
     %x = [1 1 2 3 5];
@@ -87,4 +87,6 @@ readline(s);
 writeline(s,'GRIPPER OPEN');
 readline(s);
 writeline(s,'Z-AXIS RETRACT');
+readline(s);
+response = 'Sequence Complete';
 end

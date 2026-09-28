@@ -5,7 +5,9 @@ print("Learning Pyserial")
 
 ser = serial.Serial(port="/dev/ttyACM0", baudrate=19200, timeout=10)
 
-time.sleep(2.0) # necessary sinetimes
+time.sleep(1.0) # necessary sinetimes
+#while not ser.is_open:
+#    print("Not open")
 
 ser.reset_input_buffer()
 message = "RESET"
@@ -20,10 +22,9 @@ print(response_bytes)
 response = response_bytes.decode().strip()
 print(response)
 
-#while not ser.is_open:
-#    ser.open()
-#    print("opening...")
-
-#To-Do: Use the ser object
+time.sleep(2)
+# Ser inputs
+while ser.is_open:
+    pass
 
 ser.close()
