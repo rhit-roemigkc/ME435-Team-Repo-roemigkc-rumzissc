@@ -1,5 +1,22 @@
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="main.css">
+    <style>
+    body {background-color: rgb(35, 39, 40);}
+    h1   {color: rgb(188, 188, 230);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 300%;}
+    p    {color: rgb(159, 130, 146);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }  
+    div    {color: rgb(219, 19, 112);
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 160%;}  
+    button {background-color: rgb(123, 96, 105);
+        border: 2px solid rgb(184, 179, 190);
+        color: white;
+        padding: 8px 20px;}
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plateloader</title>
@@ -8,6 +25,37 @@
     <!-- COMMENT -->
     <h1>Serial Server</h1>
     <p>This is the HTML client. There is also a MATLAB frontend.</p>
+
+    <div id="replyText">the reply will go here</div>
+    <hr>
+    <button class="button" id="reset">
+        <span class="button-content">Reset</span>
+    </button>
+
+
+    <p>X-AXIS:</p>
+    <button id="x1">1</button>
+    <button id="x2">2</button>
+    <button id="x3">3</button>
+    <button id="x4">4</button>
+    <button id="x5">5</button>
+    <p>Z-AXIS:</p>
+    <button id="ext">Extend</button>
+    <button id="ret">Retract</button>
+    <p>Gripper:</p>
+    <button id="open">Open</button>
+    <button id="close">Close</button>
+    <br><br>
+    <input type="number" value="1" id="moveFrom">
+    <input type="number" value="5" id="moveTo">
+    <button id="move">Move</button>
+    <br><br>
+    <button class="button" id="status">
+        <span class="button-content">Loader Status </span>
+    </button>
+    <br><br>
+
+
     <script src="main.js"></script>
 </body>
 </html>
