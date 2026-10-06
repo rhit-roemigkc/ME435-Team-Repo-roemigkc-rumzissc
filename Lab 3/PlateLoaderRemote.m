@@ -20,7 +20,7 @@ classdef PlateLoaderRemote < hgsetget
     methods
         function obj = PlateLoaderRemote(port)
             % Construct a PlateLoader Object
-            URL = ("http://roemigkc-pi5.rose-hulman.edu:");
+            URL = ("http://137.112.225.185:");
 
 %            portStr = '/dev/cu.usbserial-110'; % ignore the portNumber for my Mac
 
