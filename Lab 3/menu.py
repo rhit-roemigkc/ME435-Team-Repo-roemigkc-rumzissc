@@ -24,6 +24,18 @@ def main():
             print(combined)
             response = loader.send_command(combined)
             print(response)
+        elif selection == 3:
+            pos = input("Gripper Selection: ")
+            combined = "GRIPPER " + pos
+            print(combined)
+            response = loader.send_command(combined)
+            print(response)
+        elif selection == 4:
+            pos = input("Z-AXIS Selection: ")
+            combined = "Z-AXIS " + pos
+            print(combined)
+            response = loader.send_command(combined)
+            print(response)
 
     loader.disconnect()
     print("Goodbye")
