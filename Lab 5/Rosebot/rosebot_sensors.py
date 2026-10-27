@@ -10,25 +10,39 @@ class Ultrasonic:
 
 class LineSensors:
     def __init__(self):
-        pass
+        self.left = gz.LineSensor(14)
+        self.middle = gz.LineSensor(15)
+        self.right = gz.LineSensor(23)
 
     def get_left(self):
-        pass
+        # 0 is white
+        # 1 is black
+        if self.left.value == 1:
+            return "B"
+        return "W"
+
 
     def get_middle(self):
-        pass
+        if self.middle.value == 1:
+                return "B"
+        return "W"
 
     def get_right(self):
-        pass
+        if self.right.value == 1:
+                return "B"
+        return "W"
 
     def get_line_word(self):
-        pass
+        return self.get_left() + self.get_middle() + self.get_right()
 
 if __name__ == "__main__":
     print("Quick dev testing for sensors")
 
     ultra = Ultrasonic()
+    line_sensors = LineSensors()
 
     while True:
-        print(ultra.get_cm())
+        #print(ultra.get_cm())
+        #print(line_sensors.get_left())
+        #print(line_sensors.get_line_word())
         time.sleep(1.0)
