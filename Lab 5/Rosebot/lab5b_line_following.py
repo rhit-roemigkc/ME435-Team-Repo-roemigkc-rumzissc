@@ -6,6 +6,9 @@ def main():
 
     try:
         while True:
+
+            print(robot.ultrasonic.get_cm())
+            print(robot.line_sensors.get_line_word())
             # get ultrasonic sensor
 
             # if distance < 20 cm, stop robot
