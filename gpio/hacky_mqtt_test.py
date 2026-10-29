@@ -8,7 +8,7 @@ def my_callback(message_type, message_payload):
 def main():
     print("Hacky mqtt test")
     mqtt_client = mh.MqttClient()
-    mqtt_client.connect(subscription_topic_name="rumzissc/subscribed",
+    mqtt_client.connect(subscription_topic_name="rumzissc/sending",
                         publish_topic_name="rumzissc/sending", 
                         use_off_campus_broker=False) #use_off_campus_broker=True
     mqtt_client.callback = my_callback
