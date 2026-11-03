@@ -42,7 +42,7 @@ class DriveSystem:
     def spin_in_place_for_seconds(self, seconds, speed):
         """ +speed -> cw ... -speed -> ccw"""
         speedAdj = self.scale_speed(speed)
-        self.set_speeds(-speedAdj,0,0,speedAdj)
+        self.set_speeds(speedAdj,speedAdj,-speedAdj,-speedAdj)
         time.sleep(seconds)
         self.stop()
 
