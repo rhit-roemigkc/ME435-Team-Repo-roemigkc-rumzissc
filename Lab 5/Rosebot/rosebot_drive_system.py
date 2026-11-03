@@ -53,7 +53,7 @@ class DriveSystem:
             speed = - speed
 
         speedAdj = self.scale_speed(speed)
-        m = 0.1
+        m = 0.25
         B = 0
         deg_per_sec = m * speedAdj + B
 
@@ -65,4 +65,6 @@ class DriveSystem:
 
         for i in range(sides):
             self.go_straight_for_inches(inches, speed)
+            time.sleep(0.5)
             self.spin_in_place_for_degrees(degrees, speed)
+            time.sleep(0.5)

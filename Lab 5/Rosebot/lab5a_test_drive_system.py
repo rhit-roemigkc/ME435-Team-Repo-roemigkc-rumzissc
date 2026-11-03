@@ -42,7 +42,7 @@ def run_test_drive_system():
     # run_test_go_straight_for_inches(robot)
     # run_test_spin_in_place_for_seconds(robot)
     # run_test_spin_in_place_for_degrees(robot)
-    # run_test_draw_polygon(robot)
+    run_test_draw_polygon(robot)
 
 
 def run_test_go_stop(robot: Rosebot):
@@ -167,7 +167,7 @@ def run_test_spin_in_place_for_degrees(robot: Rosebot):
         # TODO: 7. Call the  spin_in_place_for_degrees  method of the   drive_system
         #  of the robot, sending it the input  degrees  and  speed.
         # -------------------------------------------------------------------------
-        robot.drive_system.spin_in_place_for_seconds(degrees, speed)
+        robot.drive_system.spin_in_place_for_degrees(degrees, speed)
         
 
 
@@ -190,11 +190,12 @@ def run_test_draw_polygon(robot: Rosebot):
         # Try a negative value for Number of sides to drive CW around the polygon.
         if sides == 0:
             break
-        degrees = 360 / sides
         inches = int(input("Length of each edge in inches (e.g., 8): "))
         if inches == 0:
             break
         input("Press the ENTER key when ready for the robot to start moving.")
+
+        robot.drive_system.draw_polygon(speed, sides, inches)
 
         # -------------------------------------------------------------------------
         # TODO: 8. Use a loop and call the  spin_in_place_for_degrees and go_straight_for_inches
