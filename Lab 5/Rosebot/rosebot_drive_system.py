@@ -19,15 +19,12 @@ class DriveSystem:
 
     def go(self, left_wheel_speed, right_wheel_speed):
         """ Speeds as integers from -100 to 100. """
-        left_wheel_speed = self.scale_speed(left_wheel_speed)
-        right_wheel_speed = self.scale_speed(right_wheel_speed)
         self.set_speeds(left_wheel_speed, left_wheel_speed, right_wheel_speed, right_wheel_speed)
 
     def stop(self):
         self.set_speeds(0,0,0,0)
 
     def go_straight_for_seconds(self, seconds, speed):
-        speed = self.scale_speed(speed)
         self.go(speed, speed)
         time.sleep(seconds)
         self.stop()
@@ -41,8 +38,7 @@ class DriveSystem:
 
     def spin_in_place_for_seconds(self, seconds, speed):
         """ +speed -> cw ... -speed -> ccw"""
-        speedAdj = self.scale_speed(speed)
-        self.set_speeds(speedAdj,speedAdj,-speedAdj,-speedAdj)
+        self.set_speeds(speed,speed,-speed,-speed)
         time.sleep(seconds)
         self.stop()
 
@@ -52,13 +48,12 @@ class DriveSystem:
             degrees = abs(degrees-360)
             speed = - speed
 
-        speedAdj = self.scale_speed(speed)
-        m = 0.25
+        m = 8
         B = 0
-        deg_per_sec = m * speedAdj + B
+        deg_per_sec = m * speed + B
 
         seconds = degrees/deg_per_sec
-        self.spin_in_place_for_seconds(seconds, speedAdj)
+        self.spin_in_place_for_seconds(seconds, speed)
 
     def draw_polygon(self, speed, sides, inches):
         degrees = 360/sides
