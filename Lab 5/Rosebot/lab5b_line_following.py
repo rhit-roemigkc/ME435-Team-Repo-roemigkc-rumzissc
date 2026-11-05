@@ -4,6 +4,10 @@ import time
 def main():
     print("Lab 5b Line Following")
     robot = Rosebot()
+    front_left_speed = 20
+    rear_left_speed = 20
+    front_right_speed = 20
+    rear_right_speed = 20
 
     try:
         while True:
