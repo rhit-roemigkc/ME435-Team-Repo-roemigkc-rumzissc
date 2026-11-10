@@ -1,25 +1,4 @@
 
-/* .wrap-grid {
-  display: grid;
-  grid-template-columns: 20% 60% 20%;
-}
-
-.wrap-grid > * {
-  height: 1000px;
-  padding: 0px; margin: 0;
-}
-
-.left-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-columns: repeat(30, 1fr);
-}
-
-.left-grid > * {
-  height: 1000px;
-  padding: 0px; margin: 0;
-  border: 1px solid white;
-} */
 .container {
   display: grid;
   grid-template-areas:
@@ -29,7 +8,7 @@
   grid-template-columns: 1fr 4fr;
   gap: 3px;
   background-color: rgb(0, 0, 0);
-  padding: 5px;
+  
 }
 .container div {
   background-color: rgb(204, 204, 204);
@@ -39,6 +18,7 @@
     background-color: cyan;
     grid-area: header;
     text-align: center;
+    
 }
 .container div.menu {
     grid-area: menu;
@@ -46,28 +26,12 @@
 .container div.content {
     background-color: white;
     grid-area: content;
-    height: 800px;
+    height: 80vh;
 }
 .container div.footer {
     grid-area: footer;
     text-align: center;  
 }
-
-
-
-/* 
-input{
-    max-height: 3%;
-}
-
-button{
-    max-height: 3%;
-} */
-/* .rectangle {
-    height: 100%;
-    width: 95%;
-    background-color: white;
-} */
 
 
 body{
