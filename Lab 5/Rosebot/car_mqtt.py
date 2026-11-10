@@ -10,7 +10,7 @@ class App:
         self.mode = "none"
 
         self.mqtt_client = mh.MqttClient()
-        self.mqtt_client.connect(subscription_topic_name="me435/rumzissc/#",
+        self.mqtt_client.connect(subscription_topic_name="me435/rumzissc/to_pi",
                                  publish_topic_name="me435/rumzissc/to_computer")
         self.mqtt_client.callback = self.mqtt_callback
 
@@ -82,6 +82,7 @@ def main():
                         app.robot.drive_system.set_speeds(-speed, -speed, speed, speed)
                     elif word == "BWB":
                         app.robot.drive_system.stop()
+                        app.mode = "none"
                     elif word == "BWW":
                         app.robot.drive_system.set_speeds(-speed, -speed, speed, speed)
                     elif word == "WBB":
@@ -92,6 +93,7 @@ def main():
                         app.robot.drive_system.set_speeds(speed, speed, -speed, -speed)
                     elif word == "WWW":
                         app.robot.drive_system.stop()
+                        app.mode = "none"
                             
                     time.sleep(0.1)
 
