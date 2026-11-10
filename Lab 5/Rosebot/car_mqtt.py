@@ -63,7 +63,8 @@ def main():
                     app.robot.drive_system.go(20, 20)
 
             if app.mode == "drive_until_line":
-                if app.robot.line_sensors.get_line_word != "WWW":
+                print(app.robot.line_sensors.get_line_word())
+                if app.robot.line_sensors.get_line_word() != "WWW":
                     app.robot.drive_system.stop()
                     app.robot.buzzer.beep(on_time=0.1, off_time=0.1, n=3)
                     app.mode = "none"
