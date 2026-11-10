@@ -31,21 +31,14 @@ class App:
 
         if message_type == "mode":
             self.mode = message_payload
-            if self.mode == "drive_until_wall" or self.mode == "drive_until_line":
-                self.robot.drive_system.go(15, 15)
-            elif self.mode == "none":
+            if self.mode == "none":
                 self.robot.drive_system.stop()
-
 
 
 def main():
     print("GPIO MQTT")
     app = App()
     last_time_sent_s = 0
-
-    time.sleep(2)
-    app.mqtt_client.send_message("is_streaming", True)
-    app.mqtt_client.send_message("mode", "drive_until_wall")
 
     try:
         while True:
@@ -66,12 +59,41 @@ def main():
                     app.robot.drive_system.stop()
                     app.robot.buzzer.beep(on_time=0.1, off_time=0.1, n=3)
                     app.mode = "none"
+                else:
+                    app.robot.drive_system.go(20, 20)
 
             if app.mode == "drive_until_line":
-                if app.robot.line_sensors.get_middle == "B":
+                if app.robot.line_sensors.get_line_word != "WWW":
                     app.robot.drive_system.stop()
                     app.robot.buzzer.beep(on_time=0.1, off_time=0.1, n=3)
                     app.mode = "none"
+                else:
+                    app.robot.drive_system.go(20, 20)
+
+            if app.mode == "line_follow":
+                if app.robot.ultrasonic.get_cm() < 20:
+                    app.robot.drive_system.stop()
+                else:
+                    word = app.robot.line_sensors.get_line_word()
+                    speed = int(13)
+                    if word == "BBB":
+                        app.robot.drive_system.set_speeds(speed, speed, speed, speed)
+                    elif word == "BBW":
+                        app.robot.drive_system.set_speeds(-speed, -speed, speed, speed)
+                    elif word == "BWB":
+                        app.robot.drive_system.stop()
+                    elif word == "BWW":
+                        app.robot.drive_system.set_speeds(-speed, -speed, speed, speed)
+                    elif word == "WBB":
+                        app.robot.drive_system.set_speeds(speed, speed, -speed, -speed)
+                    elif word == "WBW":
+                        app.robot.drive_system.set_speeds(speed, speed, speed, speed)
+                    elif word == "WWB":
+                        app.robot.drive_system.set_speeds(speed, speed, -speed, -speed)
+                    elif word == "WWW":
+                        app.robot.drive_system.stop()
+                            
+                    time.sleep(0.1)
 
     except KeyboardInterrupt:
         print("Goodbye")
