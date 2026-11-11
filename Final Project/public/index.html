@@ -7,41 +7,11 @@
 
 </head>
 <body>
-    <!-- COMMENT -->
-    <!-- <center>
-        <h1>Chat Room</h1>
-        <p>This is the HTML client.</p>
-
-        
-    </center>
-<hr>
-        <div class="wrap-grid">
-            <div class="left-grid">
-                <input type="text" value="" id="username">
-                <button id="logIn">Log In</button>
-            <br><br>
-                <input type="text" value="" id="chatBox">
-                <button id="send">Send Message</button>
-            </div>
-            <center>
-                <div class="rectangle"></div>
-            </center>
-            <p>Right</p>
-        </div>
-    
-    
-    <br><br>
-
-    
-
-    <br><br> -->
-
-
 
 <div class="container">
     <div class="header"><h2>Chat Room</h2></div>
     <div class="menu">
-        <input type="text" value="" id="username">
+        <input type="text" value="" id="username" size="40">
         <button id="logIn">Log In</button>
         <br><br>
         <label for="avatar">Choose a profile picture:</label>
@@ -49,18 +19,20 @@
         <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
     </div>
     <div class="content">
-        <p>chat messages go here</p>
+        <span id="replyTime"></span>
+        <b><span id="replyUsername"></span></b>
+        <span id="replyText"></span>
+        
     </div>
     <div class="footer">
-        <input type="text" value="" id="chatBox">
+        <input type="text" value="" id="chatBox" size="80">
         <button id="send">Send Message</button>
+        &emsp; &emsp;
         <label for="uploadImage">Upload Image:</label>
         <input type="file" id="uploadImage" name="uploadImage" accept="image/png, image/jpeg" />
     </div>
 </div>
 
-
-
-    <!-- COMMENT <script src="main.js"></script> -->
+    <script src="main.js"></script>
 </body>
 </html>
