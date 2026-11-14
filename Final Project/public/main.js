@@ -1,85 +1,74 @@
-import mqtt from 'https://cdn.jsdelivr.net/npm/mqtt@5.10.1/+esm';
-
-const URL = "ws://broker.hivemq.com";
-const TOPIC = "me435/roemigkc/final";
-
-
-let client = null;
+const usernameInput = document.getElementById("username");
+const logInButton = document.getElementById("logIn");
+const chatBox = document.getElementById("chatBox");
+const sendButton = document.getElementById("send");
+const chatLog = document.getElementById("chatLog");
+ 
 let username = null;
-
-// const $ = (sel) => document.querySelector(sel);
-
-// Helper function to add a line to the chat log
-function addChatLine(text){
-    const p = document.createElement("p");
-    p.textContent = text;
-    document.querySelector("#chatLog").appendChild(p);
-    document.querySelector("#chatLog").scrollTop = document.querySelector("#chatLog").scrollHeight;
-}
-
-
-async function sendMessage(username, message){
-    
-    if (!client || !client.connected) {
-        addChatLine("Not connected. Log in first.");
-    return;
+ 
+logInButton.onclick = () => {
+    const name = usernameInput.value.trim();
+    if (username == null) {
+        if (!name) return;
+        username = name;
+        usernameInput.disabled = true;
+        logInButton.disabled = true;
     }
-    if (!message.trim()) return;
-
-    const payload = JSON.stringify({username, message});
-    await client.publishAsync(TOPIC, payload, { qos: 0});
-
-    document.querySelector("#chatBox").value = ""; //clear only after success
+};
+ 
+function displayMessage({ username, text, time }) {
+    const line = document.createElement("p");
+    const timestamp = new Date(time).toLocaleTimeString();
+    const nameSpan = document.createElement("b");
+    nameSpan.textContent = username + ":";
+ 
+    line.append(timestamp + " - ", nameSpan, " " + text);
+    chatLog.appendChild(line);
+    chatLog.scrollTop = chatLog.scrollHeight;
 }
-
-function logIn(){
-    username = document.querySelector("#username").value.trim();
-    if (!username) return addChatLine("Enter user first.");
-    if (client) client.end(true);
-
-    let options = {
-        clientId: 'mqtt_js_client_' + Math.random().toString(16),
-        clean: true, // Clean session
-        connectTimeout: 4000, // 4 seconds
-        username: '', // Optional
-        password: '', // Optional
-        reconnectPeriod: 1000 // Auto reconnect every 1s
-    };
-
-    client = mqtt.connect(URL, options);
-
-    client.on("connect", () => {
-        addChatLine(`connected as ${username}`);
-         client.subscribe(TOPIC, { qos: 0 }, (err) => {
-            if (err) console.error("Subscription error", err);
-            else console.log(`Subscribed to ${TOPIC}`);
+ 
+async function sendMessage() {
+    const text = chatBox.value.trim();
+    if (!username) {
+        alert("Login first to send message");
+        return;
+    }
+    if (!text) return;
+ 
+    chatBox.value = "";
+    try {
+        await fetch("/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, text }),
         });
-    });
-
-    client.on("message", (topic, received) => {
-        let data;
-        try {
-        data = JSON.parse(received.toString());   // Buffer -> string -> object
-        } catch {
-        return console.warn("Ignoring non-JSON message:", received.toString());
+        poll(); // show it right away instead of waiting for the next tick
+    } catch (err) {
+        console.error("Send failed:", err);
+    }
+}
+ 
+sendButton.onclick = sendMessage;
+ 
+let lastId = 0;
+let polling = false;
+ 
+async function poll() {
+    if (polling) return; // avoid overlapping requests
+    polling = true;
+    try {
+        const res = await fetch(`/messages?after=${lastId}`);
+        const newMessages = await res.json();
+        for (const m of newMessages) {
+            displayMessage(m);
+            lastId = m.id;
         }
-        const time = new Date().toLocaleTimeString();
-        addChatLine(`${time} - ${data.username}: ${data.message}`);
-    });
-
-    client.on("error", (e) => addChatLine("Error: " + e.message));
-    client.on("close", () => console.log("Connection closed"));
-
+    } catch (err) {
+        console.error("Poll failed:", err);
+    } finally {
+        polling = false;
+    }
 }
-
-function main() {
-    document.querySelector("#logIn").onclick = logIn;
-    document.querySelector("#send").onclick = () => sendMessage(document.querySelector("#username").value,document.querySelector("#chatBox").value);
-
-    // Bonus: send on Enter
-    document.querySelector("#chatBox").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") sendMessage(document.querySelector("#chatBox").value);
-  });
-}
-
-main();
+ 
+setInterval(poll, 1000);
+poll();
